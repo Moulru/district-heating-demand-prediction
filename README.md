@@ -1,7 +1,7 @@
 # District Heating Demand Forecast using Weather Data
 
-Forecasting district heating energy demand by combining weather and heat usage data.
-기상청 2025 날씨 빅데이터 콘테스트 주제1
+Forecasting district heating energy demand by combining weather and heat usage data.  
+(기상청 2025 날씨 빅데이터 콘테스트 주제1)
 
 ## 📌 Project Description
 
