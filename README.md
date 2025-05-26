@@ -29,6 +29,10 @@ This project predicts heat energy demand for district heating systems by analyzi
 /data
 /code
 
+## 🗓 Project Duration
+
+June 2, 2025 – June 22, 2025
+
 ## 👥 Team Members
 
 - Junho Park  
