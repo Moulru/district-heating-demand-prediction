@@ -24,7 +24,36 @@ history = model.fit(
 확인된 RMSE값: 21.03
 기본적으로 이 모델에서 parameter 값을 변경해가며 코드 수정 진행
 
+---------------------------------------------------------------------------------------------------
 
 250612 첫번째 시도
 모델은 동일하며 LSTM 모델의 depth 추가(자세한 내용은 주제1번_(LSTM 최종모델) 코드 참조)
 확인된 RMSE값: 20.8
+
+
+250612 두번째 시도
+다음와 같이 모델링 진행
+ model = Sequential([
+        LSTM(128, return_sequences=True, input_shape=(seq_len, len(feature_cols))),
+        Dropout(0.1),
+        LSTM(128, return_sequences=False),
+        Dropout(0.1),
+        Dense(64, activation='relu'),
+        Dense(32, activation='relu'),
+        Dense(1)
+    ])
+    model.compile(loss='mse', optimizer='adam')
+    early_stop = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
+
+    history = model.fit(
+        X_train, y_train,
+        epochs=100,
+        batch_size=32,
+        validation_data=(X_val, y_val),
+        callbacks=[early_stop],
+        verbose=1
+    )
+확인된 RMSE값: 21.46
+
+---------------------------------------------------------------------------------------------------
+
