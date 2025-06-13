@@ -37,6 +37,6 @@ June 2, 2025 – June 22, 2025
 
 - Junho Park  
 - Sangho Byun  
-- Jihoon Han  
+- Jihun Han  
 - Seongwan Cho  
 - Jinui Jeong
