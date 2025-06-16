@@ -57,3 +57,36 @@ history = model.fit(
 
 ---------------------------------------------------------------------------------------------------
 
+진의형 try: 각 연도별 값 평균을 통해 데이터 변환 후 모델링은 그대로 사용
+확인된 RMSE값: 19?(확인 부탁드려요!)
+
+---------------------------------------------------------------------------------------------------
+
+250616 첫번째 시도
+KerasTuner를 사용해 지점별로 최적의 모델 파라미터 값 튜닝 진행(Bayesian Optimizer 사용)
+def build_model(hp):
+    model = Sequential()
+    model.add(LSTM(
+        units=hp.Int('lstm_units', min_value=64, max_value=256, step=64),
+        return_sequences=True,
+        input_shape=(seq_len, len(feature_cols))
+    ))
+    model.add(Dropout(hp.Float('dropout1', 0.1, 0.5, step=0.1)))
+
+    model.add(LSTM(
+        units=hp.Int('lstm_units2', min_value=32, max_value=128, step=32),
+        return_sequences=False
+    ))
+    model.add(Dropout(hp.Float('dropout2', 0.1, 0.5, step=0.1)))
+
+    model.add(Dense(hp.Int('dense1', 32, 128, step=32), activation='relu'))
+    model.add(Dense(1))
+
+    model.compile(
+        optimizer=Adam(hp.Choice('learning_rate', [1e-2, 1e-3, 5e-4])),
+        loss='mse'
+    )
+    return model
+가장 Best 성능을 뽑아내는(Score가 낮은) 모델을 사용해 test 데이터 예측
+확인된 RMSE값: 22.04
+
